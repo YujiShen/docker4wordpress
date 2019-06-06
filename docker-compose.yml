@@ -34,7 +34,9 @@ services:
 #      PHP_XDEBUG_REMOTE_HOST: 10.254.254.254 # macOS
 #      PHP_XDEBUG_REMOTE_HOST: 10.0.75.1 # Windows
     volumes:
-      - ./:/var/www/html
+      - ./wordpress:/var/www/html
+      - ./session.ini:/usr/local/etc/php/conf.d/session.ini
+
 ## For macOS users (https://wodby.com/stacks/wordpress/docs/local/docker-for-mac/)
 #      - ./:/var/www/html:cached # User-guided caching
 #      - docker-sync:/var/www/html # Docker-sync
@@ -117,9 +119,9 @@ services:
 #      - 'traefik.port=6081'
 #      - 'traefik.frontend.rule=Host:varnish.${PROJECT_BASE_URL}'
 
-#  redis:
-#    container_name: "${PROJECT_NAME}_redis"
-#    image: wodby/redis:$REDIS_TAG
+  redis:
+    container_name: "${PROJECT_NAME}_redis"
+    image: wodby/redis:$REDIS_TAG
 
 #  adminer:
 #    container_name: "${PROJECT_NAME}_adminer"
@@ -263,9 +265,9 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
-#volumes:
+# volumes:
 ## Docker-sync for macOS users
-#  docker-sync:
-#    external: true
+  # docker-sync:
+    # external: true
 ## For Xdebug profiler
 #  files:
